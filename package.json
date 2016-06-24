@@ -1,0 +1,12 @@
+{
+  "name": "nutty",
+  "version": "0.1.0",
+  "description": "A CLI app helper",
+  "main": "index.js",
+  "repository": { "type": "git", "url": "https://github.com/jmjuanes/nutty.git" },
+  "keywords": [ "cli", "command", "line", "terminal", "app", "helper", "cmd", "console", "arguments", "args", "options" ],
+  "author": "Josemi Juanes <josemijuanes@gmail.com>",
+  "homepage": "https://github.com/jmjuanes/nutty",
+  "license": "MIT",
+  "dependencies": { "get-args": "1.0.1" }
+}
