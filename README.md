@@ -1,7 +1,7 @@
 # nutty
 
 [![npm](https://img.shields.io/npm/v/nutty.svg?style=flat-square)](https://www.npmjs.com/package/nutty)
-[![npm](https://img.shields.io/npm/dt/nutty.svg?style=flat-square)](https://www.npmjs.com/package/nutty)º
+[![npm](https://img.shields.io/npm/dt/nutty.svg?style=flat-square)](https://www.npmjs.com/package/nutty)
 
 A CLI app helper. Implements some features:
 
@@ -28,7 +28,7 @@ function GetHello(args, options)
   //Get the name
   var name = args[0];
 
-  //Get the hello word in others languages
+  //Get the hello word
   var hello = (options.idion === 'english') ? 'Hello' : 'Hola';
 
   //Display
