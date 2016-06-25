@@ -12,6 +12,9 @@ function GetHello(args, options)
 
   //Display
   console.log('>>>>>>> ' + hello + ' ' + name + '!');
+
+  //Display done message
+  nutty.display.done('');
 }
 
 //Add a basic command
