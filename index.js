@@ -102,19 +102,14 @@ var Nutty =
       var parsed = ParseOptions(args.options, obj.options);
 
       //Check for error
-      if(parsed.error === true)
-      {
-        //Show error and exit
-        return console.log('ERROR: option "' + parsed.name + '" is mandatory...');
-      }
+      if(parsed.error === true){ return ; }
 
       //Run the callback
       return obj.callback(args.arguments, parsed.options);
     }
 
     //Show error in console
-    console.log('ERROR: unknow command "' + command + '"');
-    console.log('Use help command to display the list with all the available commands.');
+    Display.error('Unknow command "' + command + '"');
 
     //Exit
     return;
