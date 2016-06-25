@@ -1,6 +1,9 @@
 //Import dependencies
 var getArgs = require('get-args');
 
+//Import libs
+var Display = require('./lib/display.js');
+
 //Main class
 var Nutty =
 {
@@ -291,4 +294,4 @@ var Nutty =
 };
 
 //Exports to node
-module.exports = { add: Nutty.add, run: Nutty.run, set: Nutty.set };
+module.exports = { add: Nutty.add, run: Nutty.run, set: Nutty.set, display: Display };
