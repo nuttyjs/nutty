@@ -3,6 +3,7 @@ var getArgs = require('get-args');
 
 //Import libs
 var Display = require('./lib/display.js');
+var Help = require('./lib/help.js');
 
 //Main class
 var Nutty =
@@ -165,131 +166,6 @@ var Nutty =
 
     //Return the parsed options
     return { error: false, options: opt };
-  },
-
-  //Display help
-  help: function(arguments)
-  {
-    //Check the arguments
-    if(typeof arguments === 'undefined'){ var arguments = []; }
-
-    //Check the arguments length
-    if(arguments.length === 0)
-    {
-      //Show the default help
-      return Nutty.help_global();
-    }
-
-    //Show the specific documentation
-    return Nutty.help_specific(arguments[0]);
-  },
-
-  //Display the global help
-  help_global: function()
-  {
-    //Get the CLI options
-    var opt = Nutty.options;
-
-    //Display the package info
-    if(opt.name !== '' && opt.version !== '')
-    {
-      //Display a line break
-      console.log('');
-
-      //Show the package info
-      console.log(opt.name + ' v' + opt.version);
-
-      //Check the package description
-      if(opt.description !== ''){ console.log(opt.description); }
-
-      //Check the package homepage
-      if(opt.homepage !== ''){ console.log(opt.homepage); }
-    }
-
-    //Display a line break
-		console.log('');
-
-		//Commands available
-		console.log('Commands available:');
-
-    //Get the list with all the commands
-    var commands = Object.keys(Nutty.commands);
-
-    //Read all the commands
-    for(var i = 0; i < commands.length; i++)
-    {
-      //Get the command object
-      var obj = Nutty.commands[commands[i]];
-
-      //Get the space
-			var space = '';
-
-			//Add the spaces
-			for(var k = obj.command.length; k < 18; k++){ space = space + ' '; }
-
-			//Show the command info
-			console.log('  ' + obj.command + space + obj.description);
-    }
-
-    //Display an empty line
-    console.log('');
-
-    //Show help
-    console.log('Run "help <command>" to get more information about a command.');
-
-    //display an empty line
-    console.log('');
-  },
-
-  //Display the help specific
-  help_specific: function(command)
-  {
-    //Find the command on the list
-    if(typeof Nutty.commands[command] === 'undefined'){ return console.log('ERROR: unknow command "' + command + '"'); }
-
-    //Get the command object
-    var obj = Nutty.commands[command];
-
-    //Check the usage
-    if(typeof obj.usage !== 'undefined' && typeof obj.description !== 'undefined')
-    {
-      //Display a line break
-  		console.log('');
-
-      //Check the usage
-      if(typeof obj.usage !== 'undefined'){ console.log('Usage:        ' + obj.usage); }
-
-  		//Check the command description
-  		if(typeof obj.description !== 'undefined'){ console.log('Description:  ' + obj.description); }
-    }
-
-		//Check for no options
-		if(obj.options.length === 0){ return; }
-
-		//Display a line break
-		console.log('');
-
-		//Display the options
-		console.log('Options: ');
-
-		//Read the full options list
-		for(var i = 0; i < obj.options.length; i++)
-		{
-			//Get the option
-			var opt = obj.options[i];
-
-			//Get the space
-			var space = '';
-
-			//Add the spaces
-			for(var k = opt.name.length; k < 15; k++){ space = space + ' '; }
-
-			//Show the option
-			console.log('  --' + opt.name + space + opt.description);
-		}
-
-    //Display an empty line
-    console.log('');
   }
 };
 
