@@ -29,7 +29,7 @@ function GetHello(args, options)
   var name = args[0];
 
   //Get the hello word
-  var hello = (options.idion === 'english') ? 'Hello' : 'Hola';
+  var hello = (options.idiom === 'english') ? 'Hello' : 'Hola';
 
   //Display
   console.log('>>>>>>> ' + hello + ' ' + name + '!');
