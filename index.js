@@ -89,7 +89,7 @@ var Nutty =
 		var command = (args.command === '') ? 'help' : args.command;
 
     //Check for help
-    if(command === 'help'){ return Nutty.help(args.arguments); }
+    if(command === 'help'){ return Help(args.arguments, Nutty.options, Nutty.commands); }
 
     //Find the command to execute
     if(typeof Nutty.commands[command] !== 'undefined')
