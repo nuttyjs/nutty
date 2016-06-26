@@ -33,6 +33,9 @@ function GetHello(args, options)
 
   //Display
   console.log('>>>>>>> ' + hello + ' ' + name + '!');
+
+  //Display a done alert
+  nutty.display.done('');
 }
 
 //Add a basic command
@@ -118,6 +121,22 @@ Set some CLI options. Available options:
 - `name`: app name.
 - `description`: app description.
 - `homepage`: app homepage.
+
+### nutty.display
+
+A class to display messages on the terminal with colors. The following display messages are available:
+
+#### nutty.display.done(text)
+
+Display a green done alert.
+
+#### nutty.display.warning(text)
+
+Display a yellow warning alert.
+
+#### nutty.display.error(text)
+
+Display a red error alert.
 
 ### nutty.run()
 
