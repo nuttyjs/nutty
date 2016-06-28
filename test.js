@@ -28,8 +28,5 @@ nutty.add({
   ]
 });
 
-//Set the CLI options
-nutty.set({ version: '1.0.0', name: 'myapp' });
-
 //Run the CLI
 nutty.run();
