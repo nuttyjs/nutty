@@ -11,7 +11,7 @@ var config = {};
 var pkg = json.readSync(path.join(process.cwd(), 'package.json'));
 
 //Set the cli name
-config.name = (typeof pkg.cli === 'undefined') ? pkg.cli : pkg.name;
+config.name = (typeof pkg.cli === 'undefined') ? pkg.name : pkg.cli;
 
 //Check for empty name
 if(typeof config.name === 'undefined' || config.name === '')
