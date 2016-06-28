@@ -102,6 +102,7 @@ Options:
 - `version`: for setting the CLI version.
 - `description`: to display the app description on the help menu.
 
+
  **NOTE**: Why we prefer using `cli` instead of the `name` key for setting the CLI name? Because sometimes the name of the package is not the name of the CLI.
 
 ## API
