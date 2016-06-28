@@ -94,9 +94,19 @@ Options:
 
 ```
 
+## Configuration
+
+**Nutty** will get the following keys from your app's `package.json` to customize your CLI:
+
+ - `cli`: for setting the name of the CLI. If is undefined, **Nutty** will use `name` value.
+ - `version`: for setting the CLI version.
+ - `description`: to display the app description on the help menu.
+
+ **NOTE**: Why we prefer using `cli` instead of the `name` key for setting the CLI name? Because sometimes the name of the package is not the name of the CLI.
+
 ## API
 
-### nutty.add(obj)
+### `nutty.add(obj)`
 
 Add a new command to the CLI. The `obj` argument must be an object with the following keys:
 
@@ -113,32 +123,35 @@ Add a new command to the CLI. The `obj` argument must be an object with the foll
   - `type`: string with the option type. It can be: `string`, `integer`, `number` or `boolean`. Default is `string`.
   - `default`: default value.
 
-### nutty.set(obj)
-
-Set some CLI options. Available options:
-
-- `version`: app version.
-- `name`: app name.
-- `description`: app description.
-- `homepage`: app homepage.
-
-### nutty.display
+### `nutty.display`
 
 A class to display messages on the terminal with colors. The following display messages are available:
 
-#### nutty.display.done(text)
+#### `nutty.display.done(text)`
 
 Display a green done alert.
 
-#### nutty.display.warning(text)
+#### `nutty.display.warning(text)`
 
 Display a yellow warning alert.
 
-#### nutty.display.error(text)
+#### `nutty.display.error(text)`
 
 Display a red error alert.
 
-### nutty.run()
+### `nutty.storage`
+
+A class to manage CLI storage. **Nutty** uses a JSON file to save the data on the user's home folder.
+
+#### `nutty.storage.get(key)`
+
+Returns the value of `key` in the user storage.
+
+#### `nutty.storage.set(key, value)`
+
+Assigns the content of `value` to `key` in the user storage.
+
+### `nutty.run()`
 
 Runs the CLI.
 
