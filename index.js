@@ -1,19 +1,41 @@
 //Import dependencies
-var getArgs = require('get-args');
+var getargs = require('get-args');
+var json = require('ujson');
 
 //Import libs
 var Display = require('./lib/display.js');
 var Help = require('./lib/help.js');
-var ParseOptions = require('./lib/parse-options.js');
+var Options = require('./lib/options.js');
+
+//Import config
+var config = require('./config.js');
 
 //Main class
 var Nutty =
 {
-  //List with all the commands
-  commands: {},
+  //Display class
+  display: Display,
 
-  //CLI options
-  options: { version: '', name: '', description: '', homepage: '' },
+  //Storage class
+  storage:
+  {
+    //Get from storage
+    get: function(key)
+    {
+      //Get from the storage
+      return config.storage.content[key];
+    },
+
+    //set on storage
+    set: function(key, value)
+    {
+      //Set on the local storage
+      config.storage.content[key] = value;
+
+      //Save to a file
+      json.writeSync(config.storage.path, config.storage.content, { encoding: 'utf8', jsonSpace: '  ' });
+    }
+  },
 
   //Add a new command
   add: function(obj)
@@ -50,53 +72,26 @@ var Nutty =
     }
 
     //Save to the commands list
-    Nutty.commands[name] = obj;
-  },
-
-  //Set CLI options
-  set: function(key, value)
-  {
-    //Check for object
-    if(typeof key === 'object')
-    {
-      //Get the options keys
-      var keys = Object.keys(key);
-
-      //Read all the keys
-      for(var i = 0; i < keys.length; i++)
-      {
-        //Set the options
-        Nutty.options[keys[i]] = key[keys[i]];
-      }
-
-      //Exit
-      return;
-    }
-
-    //Check for undefined value
-    if(typeof value === 'undefined'){ return; }
-
-    //Set the key
-    Nutty.options[key] = value;
+    config.commands[name] = obj;
   },
 
   //Run the cli
   run: function()
   {
     //Get the arguments
-    var args = getArgs();
+    var args = getargs();
 
     //Get the command
 		var command = (args.command === '') ? 'help' : args.command;
 
     //Check for help
-    if(command === 'help'){ return Help(args.arguments, Nutty.options, Nutty.commands); }
+    if(command === 'help'){ return Help(args.arguments); }
 
     //Find the command to execute
-    if(typeof Nutty.commands[command] !== 'undefined')
+    if(typeof config.commands[command] !== 'undefined')
     {
       //Get the command object
-      var obj = Nutty.commands[command];
+      var obj = config.commands[command];
 
       //Parse the options
       var parsed = ParseOptions(args.options, obj.options);
@@ -117,4 +112,4 @@ var Nutty =
 };
 
 //Exports to node
-module.exports = { add: Nutty.add, run: Nutty.run, set: Nutty.set, display: Display };
+module.exports = Nutty;
