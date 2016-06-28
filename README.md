@@ -98,9 +98,9 @@ Options:
 
 **Nutty** will get the following keys from your app's `package.json` to customize your CLI:
 
- - `cli`: for setting the name of the CLI. If is undefined, **Nutty** will use `name` value.
- - `version`: for setting the CLI version.
- - `description`: to display the app description on the help menu.
+- `cli`: for setting the name of the CLI. If is undefined, **Nutty** will use `name` value.
+- `version`: for setting the CLI version.
+- `description`: to display the app description on the help menu.
 
  **NOTE**: Why we prefer using `cli` instead of the `name` key for setting the CLI name? Because sometimes the name of the package is not the name of the CLI.
 
