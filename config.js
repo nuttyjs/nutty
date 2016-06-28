@@ -49,8 +49,11 @@ if(pstat.isFileSync(storage_file) === false)
   json.writeSync(storage_file, {}, 'utf8');
 }
 
-//Set the storage file path
-config.storage = storage_file;
+//Set the storage object
+config.storage = { path: storage_file, content: json.readSync(storage_file, 'utf8') };
+
+//Initialize the commands list
+config.commands = {};
 
 //Exports to node
 module.exports = config;
