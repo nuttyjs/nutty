@@ -1,6 +1,6 @@
 {
   "name": "nutty",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A CLI app helper",
   "main": "index.js",
   "repository": { "type": "git", "url": "https://github.com/jmjuanes/nutty.git" },
