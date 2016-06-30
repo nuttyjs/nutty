@@ -17,6 +17,15 @@ function GetHello(args, options)
   nutty.display.done('');
 }
 
+//Set the CLI name
+nutty.name('myapp');
+
+//Set the CLI description
+nutty.description('My test app');
+
+//Set the CLI version
+nutty.version('1.0.0');
+
 //Add a basic command
 nutty.add({
   command: 'hello',
