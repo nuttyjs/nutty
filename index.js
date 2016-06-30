@@ -37,6 +37,39 @@ var Nutty =
     }
   },
 
+  //Set the CLI name
+  name: function(value)
+  {
+    //Check for undefined
+    if(typeof value === 'undefined'){ return config.name; }
+
+    //Set the name
+    config.name = value;
+
+    //Initialize the storage
+    config.storage.init();
+  },
+
+  //Set the CLI description
+  description: function(value)
+  {
+    //Check for undefined
+    if(typeof value === 'undefined'){ return config.description; }
+
+    //Set the description
+    config.description = value;
+  },
+
+  //Set the CLI version
+  version: function(value)
+  {
+    //Check for undefined
+    if(typeof value === 'undefined'){ return config.version; }
+
+    //Set the version
+    config.version = value;
+  },
+
   //Add a new command
   add: function(obj)
   {
@@ -94,7 +127,7 @@ var Nutty =
       var obj = config.commands[command];
 
       //Parse the options
-      var parsed = ParseOptions(args.options, obj.options);
+      var parsed = Options(args.options, obj.options);
 
       //Check for error
       if(parsed.error === true){ return ; }
