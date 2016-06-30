@@ -38,6 +38,15 @@ function GetHello(args, options)
   nutty.display.done('');
 }
 
+//Set the CLI name
+nutty.name('myapp');
+
+//Set the CLI description
+nutty.description('My test app');
+
+//Set the CLI version
+nutty.version('1.0.0');
+
 //Add a basic command
 nutty.add({
   command: 'hello',
@@ -94,18 +103,19 @@ Options:
 
 ```
 
-## Configuration
-
-**Nutty** will get the following keys from your app's `package.json` to customize your CLI:
-
-- `cli`: for setting the name of the CLI. If is undefined, **Nutty** will use `name` value.
-- `version`: for setting the CLI version.
-- `description`: to display the app description on the help menu.
-
-
- **NOTE**: Why we prefer using `cli` instead of the `name` key for setting the CLI name? Because sometimes the name of the package is not the name of the CLI.
-
 ## API
+
+### `nutty.name(value)`
+
+**Mandatory**: sets the CLI name. If no argument is provided, it will return the CLI name.
+
+### `nutty.description(value)`
+
+Sets the CLI description. If no argument is provided, it will return the CLI description.
+
+### `nutty.version(value)`
+
+Sets the CLI version. If no argument is provided, it will return the CLI version.
 
 ### `nutty.add(obj)`
 
@@ -142,7 +152,7 @@ Display a red error alert.
 
 ### `nutty.storage`
 
-A class to manage CLI storage. **Nutty** uses a JSON file to save the data on the user's home folder.
+A class to manage CLI storage. **Nutty** uses a JSON file with the name provided with the `nutty.name` option to save the data on the user's home folder.
 
 #### `nutty.storage.get(key)`
 
