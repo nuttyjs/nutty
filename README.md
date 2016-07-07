@@ -119,7 +119,7 @@ Sets the CLI version. If no argument is provided, it will return the CLI version
 
 ### `nutty.add(obj)`
 
-Add a new command to the CLI. The `obj` argument must be an object with the following keys:
+Add a new command to the CLI. The `obj` argument must be an object or an array with objects, each object with the following keys:
 
 - `command`: command name.
 - `description`: command description.
