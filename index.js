@@ -3,6 +3,7 @@ var getargs = require('get-args');
 var json = require('ujson');
 
 //Import libs
+var Commands = require('./lib/commands.js');
 var Display = require('./lib/display.js');
 var Help = require('./lib/help.js');
 var Options = require('./lib/options.js');
@@ -71,41 +72,32 @@ var Nutty =
   },
 
   //Add a new command
-  add: function(obj)
+  add: function(list)
   {
-    //Check the command name
-    if(typeof obj.command === 'undefined'){ return console.error('Undefined command...'); }
+    //Check the list of commands
+    if(typeof list !== 'object'){ return; }
 
-    //Save the command name
-    var name = obj.command;
+    //Check for array
+    if(Array.isArray(list) === false){ list = [ list ]; }
 
-    //Check the callback
-    if(typeof obj.callback === 'undefined'){ return console.error('Undefined callback...'); }
-
-    //Check the options
-    if(typeof obj.options === 'undefined'){ obj.options = []; }
-
-    //Read all the options
-    for(var i = 0; i < obj.options.length; i++)
+    //Read all the commands
+    for(var i = 0; i < list.length; i++)
     {
-      //Check the option name
-      if(typeof obj.options[i].name === 'undefined'){ return console.error('Undefined option name...'); }
+      //Parse the command
+      var obj = Commands.parse(list[i]);
 
-      //Check the option description
-      if(typeof obj.options[i].description === 'undefined'){ return console.error('Undefined option description...'); }
+      //Check for undefined
+      if(typeof obj === 'undefined'){ continue; }
 
-      //Check the option mandatory
-      if(typeof obj.options[i].mandatory === 'undefined'){ obj.options[i].mandatory = false; }
+      //Get the name
+      var name = obj.name;
 
-      //Check the option type
-      if(typeof obj.options[i].type === 'undefined'){ obj.options[i].type = 'string'; }
-
-      //Parse the option type
-      obj.options[i].type = obj.options[i].type.toLowerCase();
+      //Save to the commands list
+      config.commands[name] = obj;
     }
 
-    //Save to the commands list
-    config.commands[name] = obj;
+    //Exit
+    return;
   },
 
   //Run the cli
