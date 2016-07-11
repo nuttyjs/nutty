@@ -90,7 +90,7 @@ var Nutty =
       if(typeof obj === 'undefined'){ continue; }
 
       //Get the name
-      var name = obj.name;
+      var name = obj.command;
 
       //Save to the commands list
       config.commands[name] = obj;
