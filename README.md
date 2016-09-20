@@ -105,19 +105,19 @@ Options:
 
 ## API
 
-### `nutty.name(value)`
+### nutty.name(value)
 
 **Mandatory**: sets the CLI name. If no argument is provided, it will return the CLI name.
 
-### `nutty.description(value)`
+### nutty.description(value)
 
 Sets the CLI description. If no argument is provided, it will return the CLI description.
 
-### `nutty.version(value)`
+### nutty.version(value)
 
 Sets the CLI version. If no argument is provided, it will return the CLI version.
 
-### `nutty.add(obj)`
+### nutty.add(obj)
 
 Add a new command to the CLI. The `obj` argument must be an object or an array with objects, each object with the following keys:
 
@@ -134,37 +134,41 @@ Add a new command to the CLI. The `obj` argument must be an object or an array w
   - `type`: string with the option type. It can be: `string`, `integer`, `number` or `boolean`. Default is `string`.
   - `default`: default value.
 
-### `nutty.display`
+### nutty.display
 
 A class to display messages on the terminal with colors. The following display messages are available:
 
-#### `nutty.display.done(text)`
+#### nutty.display.done(text)
 
 Display a green done alert.
 
-#### `nutty.display.warning(text)`
+#### nutty.display.warning(text)
 
 Display a yellow warning alert.
 
-#### `nutty.display.error(text)`
+#### nutty.display.error(text)
 
 Display a red error alert.
 
-### `nutty.storage`
+### nutty.storage
 
 A class to manage CLI storage. **Nutty** uses a JSON file with the name provided with the `nutty.name` option to save the data on the user's home folder.
 
-#### `nutty.storage.get(key)`
+#### nutty.storage.get(key)
 
 Returns the value of `key` in the user storage.
 
-#### `nutty.storage.set(key, value)`
+#### nutty.storage.set(key, value)
 
 Assigns the content of `value` to `key` in the user storage.
 
-### `nutty.run()`
+### nutty.run(middleware)
 
-Runs the CLI.
+Run the CLI. This method accepts the following arguments:
+
+- `middleware`: (optionally) a function that will be executed before running the function associated with the command. This middleware will not be called with the `help` command. This function will be called with the following arguments:
+  - `command`: a string with the command executed.
+  - `next`: a function to continue with the CLI. You must add `return next();` at the end of your middleware in order to continue with the CLI tool.
 
 ## License
 
