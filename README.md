@@ -154,6 +154,10 @@ Display a red error alert.
 
 A class to manage CLI storage. **Nutty** uses a JSON file with the name provided with the `nutty.name` option to save the data on the user's home folder.
 
+#### nutty.storage.path()
+
+Returns the path where the JSON file with the storage data are placed. 
+
 #### nutty.storage.get(key)
 
 Returns the value of `key` in the user storage.
