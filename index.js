@@ -35,7 +35,7 @@ Nutty.storage =
   },
 
   //Get the storage path
-  path: function(){ return config.storage.path; } 
+  path: function(){ return config.storage.path; }
 };
 
 //Set the CLI name
@@ -69,6 +69,22 @@ Nutty.version = function(value)
 
   //Set the version
   config.version = value;
+};
+
+//Set the nutty values
+Nutty.set = function(opt)
+{
+  //Check the opt data
+  if(typeof opt !== 'object'){ var opt = {}; }
+
+  //Check the CLI name
+  if(typeof opt.name === 'string'){ Nutty.name(opt.name); }
+
+  //Check the CLI description
+  if(typeof opt.description === 'string'){ Nutty.description(opt.description); }
+
+  //Check the CLI version
+  if(typeof opt.version === 'string'){ Nutty.version(opt.version); }
 };
 
 //Add a new command
