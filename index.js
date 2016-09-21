@@ -32,7 +32,10 @@ Nutty.storage =
 
     //Save to a file
     json.writeSync(config.storage.path, config.storage.content, { encoding: 'utf8', jsonSpace: '  ' });
-  }
+  },
+
+  //Get the storage path
+  path: function(){ return config.storage.path; } 
 };
 
 //Set the CLI name
