@@ -38,14 +38,8 @@ function GetHello(args, options)
   nutty.display.done('');
 }
 
-//Set the CLI name
-nutty.name('myapp');
-
-//Set the CLI description
-nutty.description('My test app');
-
-//Set the CLI version
-nutty.version('1.0.0');
+//Set the CLI options
+nutty.set({ version: '1.0.0', name: 'myapp', description: 'My test app' });
 
 //Add a basic command
 nutty.add({
@@ -57,9 +51,6 @@ nutty.add({
     { name: 'idiom', description: 'Set the idiom. Available idioms: english|spanish', default: 'english' }
   ]
 });
-
-//Set the CLI options
-nutty.set({ version: '1.0.0', name: 'myapp' });
 
 //Run the CLI
 nutty.run();
@@ -107,15 +98,23 @@ Options:
 
 ### nutty.name(value)
 
-**Mandatory**: sets the CLI name. If no argument is provided, it will return the CLI name.
+**Mandatory**: set the CLI name. If no argument is provided, it will return the CLI name.
 
 ### nutty.description(value)
 
-Sets the CLI description. If no argument is provided, it will return the CLI description.
+Set the CLI description. If no argument is provided, it will return the CLI description.
 
 ### nutty.version(value)
 
-Sets the CLI version. If no argument is provided, it will return the CLI version.
+Set the CLI version. If no argument is provided, it will return the CLI version.
+
+### nutty.set(obj)
+
+Set the CLI info (name, version and description). This method accepts an object with the following options:
+
+- `name`: a `string` with the CLI name.
+- `description`: a `string` with the CLI description.
+- `version`: a `string` with the CLI version.
 
 ### nutty.add(obj)
 
@@ -156,7 +155,7 @@ A class to manage CLI storage. **Nutty** uses a JSON file with the name provided
 
 #### nutty.storage.path()
 
-Returns the path where the JSON file with the storage data are placed. 
+Returns the path where the JSON file with the storage data are placed.
 
 #### nutty.storage.get(key)
 
