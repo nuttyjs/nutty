@@ -1,8 +1,8 @@
 //Import dependencies
-var getargs = require('get-args');
 var json = require('ujson');
 
 //Import libs
+var Args = require('./lib/args.js');
 var Commands = require('./lib/commands.js');
 var Display = require('./lib/display.js');
 var Help = require('./lib/help.js');
@@ -120,20 +120,44 @@ Nutty.add = function(list)
 Nutty.run = function(middleware)
 {
   //Check the middleware
-  if(typeof middleware !== 'function'){ var middleware = function(c,n){ return n(); }; }
+  if(typeof middleware !== 'function'){ var middleware = function(c,a,o,n){ return n(); }; }
+
+  //Input cases
+  // myapp   -> display help
+  // myapp help  -> display help
+  // myapp <cmd> <args>  -> Run the command
+  // myapp <args>  -> Run the default command if exists, else display error
 
   //Get the arguments
-  var args = getargs();
+  var args = Args();
 
   //Get the command
-	var command = (args.command === '') ? 'help' : args.command;
+	var command = (args.arguments.length === 0) ? 'help' : args.arguments[0];
 
   //Check for help
   if(command === 'help'){ return Help(args.arguments); }
 
+  //Check if has default command
+  var has_default = Commands.default.has();
+
+  //Check if command exists
+  var has_command = Commands.has(command);
+
   //Find the command to execute
-  if(typeof config.commands[command] !== 'undefined')
+  if(has_default === true || has_command === true)
   {
+    //Check if the command exists
+    if(has_command === true)
+    {
+      //Remove the first argument
+      args.arguments.shift();
+    }
+    else
+    {
+      //Get the default command
+      command = Commands.default.get();
+    }
+
     //Get the command object
     var obj = config.commands[command];
 
@@ -144,7 +168,7 @@ Nutty.run = function(middleware)
     if(parsed.error === true){ return ; }
 
     //Run the middleware
-    return middleware(command, function()
+    return middleware(command, args.arguments, parsed.options, function()
     {
       //Run the command function
       obj.callback(args.arguments, parsed.options);
