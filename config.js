@@ -52,5 +52,8 @@ config.storage.init = function()
 //Initialize the commands list
 config.commands = {};
 
+//Initialize the default command object
+config.default = {};
+
 //Exports to node
 module.exports = config;
