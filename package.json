@@ -1,6 +1,6 @@
 {
   "name": "nutty",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A CLI app helper",
   "main": "index.js",
   "repository": { "type": "git", "url": "https://github.com/jmjuanes/nutty.git" },
@@ -8,12 +8,5 @@
   "author": "Josemi Juanes <josemijuanes@gmail.com>",
   "homepage": "https://github.com/jmjuanes/nutty",
   "license": "MIT",
-  "dependencies":
-  {
-    "get-args": "1.0.2",
-    "colors": "1.1.2",
-    "ujson": "1.0.1",
-    "pstat": "1.0.2",
-    "mkdirp": "0.5.1"
-  }
+  "dependencies": { "colors": "1.1.2", "ujson": "1.0.1", "pstat": "1.0.2", "mkdirp": "0.5.1" }
 }
