@@ -1,6 +1,6 @@
 //Import libs
 var args_parser = require('./lib/args.js');
-var commands = require('./lib/commands.js');
+var command = require('./lib/command.js');
 var display = require('./lib/display.js');
 var help = require('./lib/help.js');
 var options = require('./lib/options.js');
