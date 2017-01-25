@@ -1,9 +1,7 @@
 //Import libs
 var args_parser = require('./lib/args.js');
-var command = require('./lib/command.js');
 var display = require('./lib/display.js');
-var help = require('./lib/help.js');
-var options = require('./lib/options.js');
+var storage = require('./lib/storage.js');
 
 //nutty object
 var nutty = {};
@@ -11,11 +9,14 @@ var nutty = {};
 //Middlewares list
 nutty._middlewares = [];
 
-//List of commands
-nutty._commands = [];
-
 //Settings
 nutty._settings = { name: '', description: '', version: '' };
+
+//Add the display object
+nutty.display = display;
+
+//Add the storage object
+nutty.storage = storage;
 
 //Add a setting value
 nutty.set = function(key, value)
