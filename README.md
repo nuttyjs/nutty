@@ -125,17 +125,33 @@ An object to display messages on the terminal. The following display messages ar
 
 Display a green done alert.
 
+```javascript
+nutty.display.done('This is my done message');
+```
+
 #### nutty.display.warning(text)
 
 Display a yellow warning alert.
+
+```javascript
+nutty.display.warning('This is my warning message');
+```
 
 #### nutty.display.error(text)
 
 Display a red error alert.
 
+```javascript
+nutty.display.error('This is my error message');
+```
+
 #### nutty.display.json(obj)
 
 Display a pretty JSON object on console.
+
+```javascript
+nutty.display.json({ message: 'This is my message on my JSON object' });
+```
 
 
 
