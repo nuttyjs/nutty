@@ -1,7 +1,7 @@
 {
   "name": "nutty",
   "version": "0.2.0",
-  "description": "A CLI app helper",
+  "description": "A small and minimal CLI framework",
   "main": "index.js",
   "repository": { "type": "git", "url": "https://github.com/jmjuanes/nutty.git" },
   "keywords": [ "cli", "command", "line", "terminal", "app", "helper", "cmd", "console", "arguments", "args", "options" ],
