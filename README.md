@@ -1,3 +1,8 @@
+<div align="center">
+	<img width="300" src="https://avatars2.githubusercontent.com/u/24476707?v=3&s=200" alt="nutty">
+	<br>
+</div>
+
 # nutty
 
 [![npm](https://img.shields.io/npm/v/nutty.svg?style=flat-square)](https://www.npmjs.com/package/nutty)
