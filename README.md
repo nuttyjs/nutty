@@ -3,10 +3,7 @@
 [![npm](https://img.shields.io/npm/v/nutty.svg?style=flat-square)](https://www.npmjs.com/package/nutty)
 [![npm](https://img.shields.io/npm/dt/nutty.svg?style=flat-square)](https://www.npmjs.com/package/nutty)
 
-A CLI app helper. Implements some features:
-
-- Build automatically the CLI help and the specific command help.
-- Set mandatory options.
+> A small and minimal CLI framework
 
 ## Install
 
@@ -22,34 +19,26 @@ npm install nutty
 //Import nutty
 var nutty = require('nutty');
 
-//Get hello function
-function GetHello(args, options)
+//Set the CLI name
+nutty.set('name', 'myapp');
+
+//Set the CLI description
+nutty.set('description', 'My test app');
+
+//Set the CLI version
+nutty.set('version', '1.0.0');
+
+//Use a middleware
+nutty.use(function(args, opt, next)
 {
   //Get the name
   var name = args[0];
 
   //Get the hello word
-  var hello = (options.idiom === 'english') ? 'Hello' : 'Hola';
+  var hello = (opt.idiom === 'spanish') ? 'Hola' : 'Hello';
 
-  //Display
+  //Display in console
   console.log('>>>>>>> ' + hello + ' ' + name + '!');
-
-  //Display a done alert
-  nutty.display.done('');
-}
-
-//Set the CLI options
-nutty.set({ version: '1.0.0', name: 'myapp', description: 'My test app' });
-
-//Add a basic command
-nutty.add({
-  command: 'hello',
-  description: 'Get hello with your name',
-  usage: 'myapp hello [your_name][options]',
-  callback: GetHello,
-  options: [
-    { name: 'idiom', description: 'Set the idiom. Available idioms: english|spanish', default: 'english' }
-  ]
 });
 
 //Run the CLI
@@ -70,72 +59,67 @@ $ myapp hello Susan --idiom spanish
 >>>>>>> Hola Susan!
 ```
 
-Prints the global help:
-
-```
-$ myapp help
-
-myapp v1.0.0
-
-Commands available:
-  hello          Get hello with your name
-```
-
-Prints the help for a specific command:
-
-```
-$ myapp help hello
-
-Usage:        myapp hello [your_name][options]
-Description:  Get hello with your name
-
-Options:
-  --idiom        Set the idiom. Available idioms: english|spanish
-
-```
 
 ## API
 
-### nutty.name(value)
+### nutty.get(key)
 
-**Mandatory**: set the CLI name. If no argument is provided, it will return the CLI name.
+Returns the value of the setting variable called `key`.
 
-### nutty.description(value)
+### nutty.set(key, value)
 
-Set the CLI description. If no argument is provided, it will return the CLI description.
+Assigns the value of the setting variable called `key` to `value`.
 
-### nutty.version(value)
+```javascript
+nutty.set('name', 'my-app'); //Initialize the 'name' variable to 'my-app'
+nutty.get('name'); //--> Return: ' my-app'
+```
 
-Set the CLI version. If no argument is provided, it will return the CLI version.
+### nutty.use(fn)
 
-### nutty.set(obj)
+Add a new middleware to the CLI. Nutty is based on middlewares, that are functions that have access to the `arguments` object, the `options` object and the `next` function.
 
-Set the CLI info (name, version and description). This method accepts an object with the following options:
+Example:
 
-- `name`: a `string` with the CLI name.
-- `description`: a `string` with the CLI description.
-- `version`: a `string` with the CLI version.
+```javascript
+nutty.use(function(args, opt, next)
+{
+  // Do your magic
+  // ....
 
-### nutty.add(obj)
+  //Next middleware
+  return next();
+});
+```
 
-Add a new command to the CLI. The `obj` argument must be an object or an array with objects, each object with the following keys:
+#### arguments
 
-- `command`: command name.
-- `description`: command description.
-- `usage`: command usage.
-- `callback`: function to execute. Will get two arguments:
-  - `args`: an array with the arguments provided to this command.
-  - `options`: an object with one key for each option used.
-- `options`: an array with all the options that this command accepts. Each object of the array must have the following keys:
-  - `name`: a string with the option name (**mandatory**).
-  - `description`: a string with the option description (**mandatory**).
-  - `mandatory`: set `true` if this options is mandatory.
-  - `type`: string with the option type. It can be: `string`, `integer`, `number` or `boolean`. Default is `string`.
-  - `default`: default value.
+The `arguments` object is a list with all the arguments that didn't have an option associated with them.
+
+Example:
+```
+myapp argument1 argument2 --option1 argument3
+--> [ "argument1", "argument2" ]
+```
+
+#### options
+
+The `options` object is an object with all the options with the format `key = value`.
+
+Example:
+```
+myapp --option1 --option2 Hello --option3 3.123
+--> { "option1": true, "option2": "Hello", "option3": "3.123" }
+```
+
+#### next
+The `next` function is a function that will call the next middleware on the list when is invoked.
+
+
 
 ### nutty.display
 
-A class to display messages on the terminal with colors. The following display messages are available:
+An object to display messages on the terminal. The following display messages are available:
 
 #### nutty.display.done(text)
 
@@ -149,29 +133,20 @@ Display a yellow warning alert.
 
 Display a red error alert.
 
-### nutty.storage
+#### nutty.display.json(obj)
 
-A class to manage CLI storage. **Nutty** uses a JSON file with the name provided with the `nutty.name` option to save the data on the user's home folder.
+Display a pretty JSON object on console.
 
-#### nutty.storage.path()
 
-Returns the path where the JSON file with the storage data are placed.
 
-#### nutty.storage.get(key)
+### nutty.run()
 
-Returns the value of `key` in the user storage.
+Run the CLI.
 
-#### nutty.storage.set(key, value)
+## Related
 
-Assigns the content of `value` to `key` in the user storage.
-
-### nutty.run(middleware)
-
-Run the CLI. This method accepts the following arguments:
-
-- `middleware`: (optionally) a function that will be executed before running the function associated with the command. This middleware will not be called with the `help` command. This function will be called with the following arguments:
-  - `command`: a string with the command executed.
-  - `next`: a function to continue with the CLI. You must add `return next();` at the end of your middleware in order to continue with the CLI tool.
+- [nutty-command](https://github.com/nuttyjs/nutty-command) A command middleware for nutty.
+- [nutty-help](https://github.com/nuttyjs/nutty-help) A help middleware for nutty.
 
 ## License
 
