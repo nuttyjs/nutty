@@ -146,7 +146,6 @@ Run the CLI.
 ## Related
 
 - [nutty-command](https://github.com/nuttyjs/nutty-command) A command middleware for nutty.
-- [nutty-help](https://github.com/nuttyjs/nutty-help) A help middleware for nutty.
 
 ## License
 
