@@ -126,6 +126,14 @@ The `next` function is a function that will call the next middleware on the list
 
 An object to display messages on the terminal. The following display messages are available:
 
+#### nutty.display.info(text)
+
+Display a blue info alert.
+
+```javascript
+nutty.display.info('This is my info message');
+```
+
 #### nutty.display.done(text)
 
 Display a green done alert.
