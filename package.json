@@ -1,12 +1,12 @@
 {
   "name": "nutty",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A small and minimal CLI framework",
   "main": "index.js",
-  "repository": { "type": "git", "url": "https://github.com/jmjuanes/nutty.git" },
+  "repository": { "type": "git", "url": "https://github.com/nuttyjs/nutty.git" },
   "keywords": [ "cli", "command", "line", "terminal", "app", "helper", "cmd", "console", "arguments", "args", "options" ],
   "author": "Josemi Juanes <josemijuanes@gmail.com>",
-  "homepage": "https://github.com/jmjuanes/nutty",
+  "homepage": "https://github.com/nuttyjs/nutty",
   "license": "MIT",
-  "dependencies": { "colors": "1.1.2", "pstat": "1.0.2", "keue": "0.0.3", "mkdirp": "0.5.1", "ujson": "1.0.3" }
+  "dependencies": { "pstat": "1.0.2", "keue": "0.0.3", "mkdirp": "0.5.1", "ujson": "1.0.3" }
 }
