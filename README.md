@@ -128,6 +128,7 @@ Run the CLI.
 
 ## Related
 
+- [nutty-log](https://guthub.com/nuttyjs/nutty-log) Logger for cli apps and nutty middlewares.
 - [nutty-command](https://github.com/nuttyjs/nutty-command) A command middleware for nutty.
 
 ## License
