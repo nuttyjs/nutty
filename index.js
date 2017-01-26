@@ -1,6 +1,5 @@
 //Import libs
 var args_parser = require('./lib/args.js');
-var display = require('./lib/display.js');
 var storage = require('./lib/storage.js');
 
 //nutty object
@@ -11,9 +10,6 @@ nutty._middlewares = [];
 
 //Settings
 nutty._settings = { name: '', description: '', version: '' };
-
-//Add the display object
-nutty.display = display;
 
 //Add the storage object
 nutty.storage = storage;
