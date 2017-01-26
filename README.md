@@ -7,6 +7,7 @@
 
 [![npm](https://img.shields.io/npm/v/nutty.svg?style=flat-square)](https://www.npmjs.com/package/nutty)
 [![npm](https://img.shields.io/npm/dt/nutty.svg?style=flat-square)](https://www.npmjs.com/package/nutty)
+[![npm](https://img.shields.io/npm/l/nutty.svg?style=flat-square)](https://github.com/nuttyjs/nutty)
 
 > A small and minimal CLI framework
 
