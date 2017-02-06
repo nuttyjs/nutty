@@ -1,5 +1,5 @@
 <div align="center">
-	<img width="300" src="https://avatars2.githubusercontent.com/u/24476707?v=3&s=200" alt="nutty">
+	<img width="300" src="https://raw.githubusercontent.com/nuttyjs/artwork/master/logo.png" alt="nutty">
 	<br>
 </div>
 
