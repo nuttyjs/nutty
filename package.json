@@ -1,6 +1,6 @@
 {
   "name": "nutty",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A small and minimal CLI framework",
   "main": "index.js",
   "repository": { "type": "git", "url": "https://github.com/nuttyjs/nutty.git" },
@@ -8,5 +8,5 @@
   "author": "Josemi Juanes <josemijuanes@gmail.com>",
   "homepage": "https://github.com/nuttyjs/nutty",
   "license": "MIT",
-  "dependencies": { "pstat": "1.0.2", "keue": "0.0.3", "mkdirp": "0.5.1", "ujson": "1.0.3" }
+  "dependencies": { "keue": "0.0.3", "nutty-log": "0.0.6" }
 }
