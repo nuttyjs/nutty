@@ -1,6 +1,9 @@
+//Import dependencies
+var log = require('nutty-log');
+
 //Import libs
-var args_parser = require('./lib/args.js');
-var storage = require('./lib/storage.js');
+var parse_args = require('./lib/args.js');
+var parse_body = require('./lib/body.js');
 
 //nutty object
 var nutty = {};
@@ -10,9 +13,6 @@ nutty._middlewares = [];
 
 //Settings
 nutty._settings = { name: '', description: '', version: '' };
-
-//Add the storage object
-nutty.storage = storage;
 
 //Add a setting value
 nutty.set = function(key, value)
@@ -47,57 +47,39 @@ nutty.use = function(fn)
   return;
 };
 
-//Add a new command
-nutty.add = function(list)
-{
-  //Check the list of commands
-  if(typeof list !== 'object'){ return; }
-
-  //Check for array
-  if(Array.isArray(list) === false){ list = [ list ]; }
-
-  //Read all the commands
-  for(var i = 0; i < list.length; i++)
-  {
-    //Parse the command
-    var obj = Commands.parse(list[i]);
-
-    //Check for undefined
-    if(typeof obj === 'undefined'){ continue; }
-
-    //Get the name
-    var name = obj.command;
-
-    //Save to the commands list
-    config.commands[name] = obj;
-  }
-
-  //Exit
-  return;
-};
-
 //Run the cli
 nutty.run = function()
 {
-  //Parse the arguments
-  var args = args_parser();
-
-  //Middlewares recursive caller
-  var middlewares_recursive = function(index)
+  //Check the number of middlewares
+  if(nutty._middlewares.length === 0)
   {
-    //Check the index value
-    if(index >= nutty._middlewares.length){ return help(args.arguments, opt.options); }
+    //Display error in console and exit
+    return log.error('No middlewares on CLI');
+  }
 
-    //Call the middleware
-    nutty._middlewares[index](args.arguments, args.options, function()
+  //Parse the arguments
+  var args = parse_args();
+
+  //Parse the body
+  parse_body(function(body)
+  {
+    //Middlewares recursive caller
+    var middlewares_recursive = function(index)
     {
-      //Next middleware on the list
-      return middlewares_recursive(index + 1);
-    });
-  };
+      //Check the index value
+      if(index >= nutty._middlewares.length){ return; }
 
-  //Read all the middlewares recursive
-  return middlewares_recursive(0);
+      //Call the middleware
+      nutty._middlewares[index](args, body, function()
+      {
+        //Next middleware on the list
+        return middlewares_recursive(index + 1);
+      });
+    };
+
+    //Read all the middlewares recursive
+    return middlewares_recursive(0);
+  });
 };
 
 //Exports to node
