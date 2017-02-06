@@ -11,13 +11,13 @@ nutty.set('description', 'My test app');
 nutty.set('version', '1.0.0');
 
 //Use a middleware
-nutty.use(function(args, opt, next)
+nutty.use(function(args, body, next)
 {
   //Get the name
-  var name = args[0];
+  var name = args.arguments[0];
 
   //Get the hello word
-  var hello = (opt.idiom === 'english') ? 'Hello' : 'Hola';
+  var hello = (args.options.idiom === 'english') ? 'Hello' : 'Hola';
 
   //Display in console
   console.log('>>>>>>> ' + hello + ' ' + name + '!');
