@@ -2,7 +2,7 @@
 var nutty = require('../index.js');
 
 //Set the CLI name
-nutty.set('name', 'myapp');
+nutty.set('name', 'hello');
 
 //Set the CLI description
 nutty.set('description', 'My test app');
