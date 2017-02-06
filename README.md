@@ -131,7 +131,7 @@ A string with the text piped from `stdin`.
 
 #### next
 
-The `next` function is a function that will call the next middleware on the list when is invoked.
+(**Optionally**) The `next` function is a function that will call the next middleware on the list when is invoked.
 
 
 ### nutty.run()
