@@ -106,9 +106,9 @@ nutty.use(function(args, body, next)
 - `args.arguments`: a list with all the arguments that didn't have an option associated with them.
 
 Example:
+
 ```
 myapp argument1 argument2 --option1 argument3 --option2 --option3 3.123
---> [ "argument1", "argument2" ]
 ```
 
 Then the args object will has the following structure:
