@@ -1,5 +1,5 @@
 //Import nutty
-var nutty = require('./index.js');
+var nutty = require('../index.js');
 
 //Set the CLI name
 nutty.set('name', 'myapp');
