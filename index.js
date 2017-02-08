@@ -3,7 +3,6 @@ var log = require('nutty-log');
 
 //Import libs
 var parse_args = require('./lib/args.js');
-var parse_body = require('./lib/body.js');
 
 //nutty object
 var nutty = {};
@@ -12,7 +11,7 @@ var nutty = {};
 nutty._middlewares = [];
 
 //Settings
-nutty._settings = { name: '', description: '', version: '' };
+nutty._settings = { name: '', description: '', version: '', body: true };
 
 //Add a setting value
 nutty.set = function(key, value)
@@ -60,26 +59,32 @@ nutty.run = function()
   //Parse the arguments
   var args = parse_args();
 
-  //Parse the body
-  parse_body(function(body)
+  //Middlewares recursive caller
+  var middlewares_recursive = function(index)
   {
-    //Middlewares recursive caller
-    var middlewares_recursive = function(index)
+    //Check the index value
+    if(index >= nutty._middlewares.length){ return; }
+
+    //Call the middleware
+    nutty._middlewares[index](args, function(error)
     {
-      //Check the index value
-      if(index >= nutty._middlewares.length){ return; }
+      //Check for undefined error
+      if(typeof error === 'undefined'){ var error = null; }
 
-      //Call the middleware
-      nutty._middlewares[index](args, body, function()
+      //Check for error
+      if(error && out instanceof Error)
       {
-        //Next middleware on the list
-        return middlewares_recursive(index + 1);
-      });
-    };
+        //Throw the error
+        throw error;
+      }
 
-    //Read all the middlewares recursive
-    return middlewares_recursive(0);
-  });
+      //Next middleware on the list
+      return middlewares_recursive(index + 1);
+    });
+  };
+
+  //Read all the middlewares recursive
+  return middlewares_recursive(0);
 };
 
 //Exports to node
