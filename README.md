@@ -35,7 +35,7 @@ nutty.set('description', 'Say hello');
 nutty.set('version', '1.0.0');
 
 //Use a middleware
-nutty.use(function(args, body, next)
+nutty.use(function(args, next)
 {
   //Get the name
   var name = args.arguments[0];
@@ -68,10 +68,6 @@ $ hello Susan --idiom spanish
 
 ## API
 
-### nutty.get(key)
-
-Returns the value of the setting variable called `key`.
-
 ### nutty.set(key, value)
 
 Assigns the value of the setting variable called `key` to `value`.
@@ -81,14 +77,24 @@ nutty.set('name', 'my-app'); //Initialize the 'name' variable to 'my-app'
 nutty.get('name'); //--> Return: ' my-app'
 ```
 
+| key | description | type | default |
+|-----|-------------|------|---------|
+| name | The CLI name | `string` | `''` |
+| description | The CLI description | `string` | `''` |
+| version | The CLI version | `string` | `''` |
+
+### nutty.get(key)
+
+Returns the value of the setting variable called `key`.
+
 ### nutty.use(fn)
 
-Add a new middleware to the CLI. Nutty is based on middlewares, that are functions that have access to the `arguments` object, the `body` string and the `next` function.
+Add a new middleware to the CLI. Nutty is based on middlewares, that are functions that have access to the `arguments` object and the `next` function.
 
 Example:
 
 ```javascript
-nutty.use(function(args, body, next)
+nutty.use(function(args, next)
 {
   // Do your magic
   // ....
@@ -125,13 +131,9 @@ Then the args object will has the following structure:
 }
 ```
 
-#### body
-
-A string with the text piped from `stdin`.
-
 #### next
 
-(**Optionally**) The `next` function is a function that will call the next middleware on the list when is invoked.
+The `next` argument is a function that will call the next middleware on the list when is invoked.
 
 
 ### nutty.run()
