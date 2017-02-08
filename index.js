@@ -72,7 +72,7 @@ nutty.run = function()
       if(typeof error === 'undefined'){ var error = null; }
 
       //Check for error
-      if(error && out instanceof Error)
+      if(error && error instanceof Error)
       {
         //Throw the error
         throw error;
