@@ -11,7 +11,7 @@ nutty.set('description', 'My test app');
 nutty.set('version', '1.0.0');
 
 //Use a middleware
-nutty.use(function(args, body, next)
+nutty.use(function(args, next)
 {
   //Get the name
   var name = args.arguments[0];
